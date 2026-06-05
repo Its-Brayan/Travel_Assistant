@@ -1,0 +1,161 @@
+import sys
+import os
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0,ROOT_DIR)
+from Agents.Planner_Agent import PlannerAgent
+from Agents.Accomodation_Agent import AccomodationAgent
+from Agents.Activities_Agent import ActivitesAgent
+from Agents.Budget_Agent import BudgetAgent
+from Agents.Itinerary_Agent import ItineraryAgent
+from langgraph.graph import StateGraph,END
+from typing import TypedDict
+from mcp.client.session import ClientSession
+from mcp.client.stdio import stdio_client,StdioServerParameters
+import asyncio
+import traceback
+
+PlannerAgent = PlannerAgent()
+AccomodationAgent = AccomodationAgent()
+ActivitesAgent = ActivitesAgent()
+BudgetAgent = BudgetAgent()
+ItineraryAgent = ItineraryAgent()
+class TravelAgent(TypedDict):
+    query: str
+    plan: dict
+    accomodate:dict
+    activities:dict
+    budget:dict
+    itinerary:dict
+    mcp_session:ClientSession
+
+def planner_node(state:TravelAgent):
+    print("Planner Agent is thinking...")
+    plan_result = PlannerAgent.plan(state['query'])
+    result = plan_result['plan_result']
+    print(f"Examining the question{state['query']}")
+    return{
+        'plan' : result.content
+    }
+
+def accomodation_node(state:TravelAgent):
+    print("Finding the best hotel...")
+    accomodation_result = AccomodationAgent.accomodate(state['plan'])
+    result = accomodation_result['accomodation_result']
+    print("Comparing prices...")
+    return{
+        'accomodate':result.content
+    }
+
+def activites_node(state:TravelAgent):
+   print("Finding activities...")
+   acitivities_result = ActivitesAgent.plan_activites(state['plan'])
+   result = acitivities_result['activity_plan']
+   return{
+       'activities':result
+   }
+
+def budget_node(state:TravelAgent):
+    print("Calculating budget and ensuring compliance...")
+    budget_result = BudgetAgent.budget_plan(state['plan'])
+    result = budget_result['budget_plan']
+    return{
+        'budget':result
+    }
+
+def itinerary_node(state:TravelAgent):
+    print("Compiling Everything...")
+    itinerary_result = ItineraryAgent.itinerary_result()
+    result = itinerary_result['itinerary']
+    return{
+        'itinerary':result
+    }
+
+
+def run_graph() -> StateGraph:
+    workflow = StateGraph(TravelAgent)
+
+    workflow.add_node('planner',planner_node)
+    workflow.add_node('accomodator',accomodation_node)
+    workflow.add_node('activities',activites_node)
+    workflow.add_node('budgeter',budget_node)
+    workflow.add_node('itinerary',itinerary_node)
+
+    workflow.set_entry_point('planner')
+
+    workflow.add_edge('planner','accomodator')
+    workflow.add_edge('planner','activities')
+    workflow.add_edge('planner','budgeter')
+    workflow.add_edge('accomodator','itinerary')
+    workflow.add_edge('activities','itinerary')
+    workflow.add_edge('budgeter','itinerary')
+    workflow.add_edge('itinerary',END)
+
+    return workflow.compile()
+
+
+async def run_pipeline(query:str):
+     print(f"\n{'='*60}")
+     print(f"Starting pipeline for {query}")
+     print(f"\n{'='*60}\n")
+     print("Starting MCP connection...")
+     
+     servers ={
+         "weather":StdioServerParameters(
+         command='/home/brayan/Aiprojects/venv/bin/python',
+         args=[
+        "-m",
+        "mcp_weather_server"
+      ],
+      
+     ),
+     "web_search":StdioServerParameters(
+         command ="uvx",
+         args=["duckduckgo-mcp-server"],
+         env = {
+                "DDG_SAFE_SEARCH": "STRICT",
+                "DDG_REGION": ""
+            }
+
+     )
+     }
+     sessions = {}
+     for name, server_params in servers.items():
+         async with stdio_client(server_params) as (read,write):
+           async with ClientSession(read,write) as session:
+                print("Transport (stdio) connected")
+                print("Session created")
+                await session.initialize()
+                print("MCP initialized successfully")
+                sessions[name] = session
+                tools = await session.list_tools()
+                print("Tools from: ",name )
+                print("TOOLS",tools)
+                for tool in tools.tools:
+                 print(f"- {tool.name}")
+     graph = run_graph()
+     result = await graph.ainvoke(
+                       {
+                         "query":query,
+                         'plan': {},
+                         'accomodate':{},
+                        'activites':{},
+                        'budget':{},
+                        'itinerary':{},
+                        'mcp_session':session
+                     }
+                 )
+     print(f"\n{'='*60}")
+     print(f"Pipeline Complete")
+     print(f"{'='*60}\n")
+
+     return result
+             
+
+
+if __name__ == '__main__':
+    response = asyncio.run(run_pipeline("Hotels around mombasa and activites I could around there, my budget is 5000 ksh"))
+    
+    print(response)
+
+
+
