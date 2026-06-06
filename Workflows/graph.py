@@ -21,11 +21,11 @@ BudgetAgent = BudgetAgent()
 ItineraryAgent = ItineraryAgent()
 class TravelAgent(TypedDict):
     query: str
-    plan: dict
-    accomodate:dict
-    activities:dict
-    budget:dict
-    itinerary:dict
+    plan: str
+    accomodate:str
+    activities:str
+    budget:str
+    itinerary:str
     mcp_session:ClientSession
 
 def planner_node(state:TravelAgent):
@@ -51,7 +51,7 @@ def activites_node(state:TravelAgent):
    acitivities_result = ActivitesAgent.plan_activites(state['plan'])
    result = acitivities_result['activity_plan']
    return{
-       'activities':result
+       'activities':result.content
    }
 
 def budget_node(state:TravelAgent):
@@ -59,15 +59,19 @@ def budget_node(state:TravelAgent):
     budget_result = BudgetAgent.budget_plan(state['plan'])
     result = budget_result['budget_plan']
     return{
-        'budget':result
+        'budget':result.content
     }
 
 def itinerary_node(state:TravelAgent):
     print("Compiling Everything...")
-    itinerary_result = ItineraryAgent.itinerary_result()
+    itinerary_result = ItineraryAgent.itinerary_result(
+        accomodator=state['accomodate'],
+        activities=state['activities'],
+        budgeter=state['budget']
+    )
     result = itinerary_result['itinerary']
     return{
-        'itinerary':result
+        'itinerary':result.content
     }
 
 
@@ -136,11 +140,11 @@ async def run_pipeline(query:str):
      result = await graph.ainvoke(
                        {
                          "query":query,
-                         'plan': {},
-                         'accomodate':{},
-                        'activites':{},
-                        'budget':{},
-                        'itinerary':{},
+                         'plan': '',
+                         'accomodate':'',
+                        'activities':'',
+                        'budget':'',
+                        'itinerary':'',
                         'mcp_session':session
                      }
                  )
