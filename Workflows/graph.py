@@ -132,20 +132,18 @@ async def run_pipeline(query:str):
      }
      sessions = {}
      for name, server_params in servers.items():
-           read,write =  stdio_client(server_params).__aenter__()
-           session = ClientSession(read,write)
-           print("Transport (stdio) connected")
-           print("Session created")
-           await session.initialize()
-           print("MCP initialized successfully")
-           sessions[name] = session
-           tools = await session.list_tools()
-           print("Tools from: ",name )
-           print("TOOLS",tools)
-           for tool in tools.tools:
-                print(f"- {tool.name}")
-
-                
+         async with stdio_client(server_params) as (read,write):
+           async with ClientSession(read,write) as session:
+                print("Transport (stdio) connected")
+                print("Session created")
+                await session.initialize()
+                print("MCP initialized successfully")
+                sessions[name] = session
+                tools = await session.list_tools()
+                print("Tools from: ",name )
+                print("TOOLS",tools)
+                for tool in tools.tools:
+                 print(f"- {tool.name}")
      graph = run_graph()
      result = await graph.ainvoke(
                        {
@@ -155,7 +153,7 @@ async def run_pipeline(query:str):
                         'activities':'',
                         'budget':'',
                         'itinerary':'',
-                    
+                        'mcp_session':session
                      }
                  )
      print(f"\n{'='*60}")
