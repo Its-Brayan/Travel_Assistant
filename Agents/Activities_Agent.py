@@ -5,11 +5,11 @@ from Code.load_yaml import load_config
 
 class ActivitesAgent:
     def plan_activites(self,query:str):
-        prompt = build_prompt_body(load_config(ACTIVITIES_PROMPT),query)
+        config = load_config(ACTIVITIES_PROMPT)
+        prompt = build_prompt_body(config['activities_agent'],query)
         llm = get_llm('llama-3.3-70b-versatile')
         response = llm.invoke(prompt)
 
-        result = {
+        return {
             'activity_plan':response
         }
-        result

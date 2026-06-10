@@ -6,7 +6,8 @@ from Code.prompt_builder import build_prompt_body
 class AccomodationAgent():
 
     def accomodate(self, query:str):
-        prompt = build_prompt_body(load_config(ACCOMODATION_PROMPT),query)
+        config = load_config(ACCOMODATION_PROMPT)
+        prompt = build_prompt_body(config['accommodation_agent'],query)
         llm = get_llm('llama-3.3-70b-versatile')
         result = llm.invoke(prompt)
 

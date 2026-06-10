@@ -12,6 +12,7 @@ from typing import TypedDict
 from mcp.client.session import ClientSession
 from mcp.client.stdio import stdio_client,StdioServerParameters
 import asyncio
+from langgraph.types import interrupt
 import traceback
 
 PlannerAgent = PlannerAgent()
@@ -24,11 +25,18 @@ class TravelAgent(TypedDict):
     plan: str
     accomodate:str
     activities:str
+    duration: str
+    start_date:str
     budget:str
     itinerary:str
     mcp_session:ClientSession
 
 def planner_node(state:TravelAgent):
+    user_input = interrupt({
+        "Message":"Please confirm trip dates and number of days"
+    })
+    state['start_date'] = user_input['start_date']
+    state['duration'] = user_input['duration']
     print("Planner Agent is thinking...")
     plan_result = PlannerAgent.plan(state['query'])
     result = plan_result['plan_result']
