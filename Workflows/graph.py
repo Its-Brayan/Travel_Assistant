@@ -16,7 +16,7 @@ import asyncio
 from langgraph.types import interrupt
 import traceback
 
-uvx_path = shutil.which('uvx')
+uvx_path = shutil.which('uvx') or "npx"
 npx_path = shutil.which('npx')
 print(npx_path)
 PlannerAgent = PlannerAgent()
