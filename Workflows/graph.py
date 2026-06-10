@@ -148,12 +148,9 @@ async def run_pipeline(query:str):
             }
 
      ),
-     "currency-conversion": StdioServerParameters(
-         command = npx_path,
-         args = [
-             "mcp-remote",
-             "https://currency-mcp.wesbos.com/sse"
-         ]
+     "currency-converter": StdioServerParameters(
+         command = sys.executable,
+         args = ["-m", "currency_mcp_server"],
      )
      }
      sessions = {}
