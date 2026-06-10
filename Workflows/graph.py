@@ -42,34 +42,46 @@ def planner_node(state:TravelAgent):
     print("Planner Agent is thinking...")
     plan_result = PlannerAgent.plan(state['query'])
     result = plan_result['plan_result']
+    clean_text = result.content
     print(f"Examining the question{state['query']}")
+    if isinstance(clean_text,dict):
+        clean_text = "/n".join(f"{k}:{v}" for k,v in clean_text.items())
     return{
-        'plan' : str(result.content)
+        'plan' : clean_text
     }
 
 def accomodation_node(state:TravelAgent):
     print("Finding the best hotel...")
     accomodation_result = AccomodationAgent.accomodate(state['plan'])
     result = accomodation_result['accomodation_result']
+    clean_text = result.content
     print("Comparing prices...")
+    if isinstance(clean_text,dict):
+        "\n".join(f"{k}:{v}" for k,v in clean_text.items())
     return{
-        'accomodate':str(result.content)
+        'accomodate':clean_text
     }
 
 def activites_node(state:TravelAgent):
    print("Finding activities...")
    acitivities_result = ActivitesAgent.plan_activites(state['plan'])
    result = acitivities_result['activity_plan']
+   clean_text = result.content
+   if isinstance(clean_text,dict):
+       "\n".join(f"{k}:{v}" for k, v in clean_text.items())
    return{
-       'activities': str(result.content)
+       'activities': clean_text
    }
 
 def budget_node(state:TravelAgent):
     print("Calculating budget and ensuring compliance...")
     budget_result = BudgetAgent.budget_plan(state['plan'])
     result = budget_result['budget_plan']
+    clean_text = result.content
+    if isinstance(clean_text,dict);
+        "\n".join(f"{k}:{v}" for k,v in clean_text.items())
     return{
-        'budget': str(result.content)
+        'budget': clean_text
     }
 
 def itinerary_node(state:TravelAgent):
@@ -80,8 +92,11 @@ def itinerary_node(state:TravelAgent):
         budgeter=state['budget']
     )
     result = itinerary_result['itinerary']
+    clean_text = result.content
+    if isinstance(clean_text,dict):
+        "\n".join(f"{k}:{v}" for k, v in clean_text.items())
     return{
-        'itinerary':str(result.content)
+        'itinerary':clean_text
     }
 
 
