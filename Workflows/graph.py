@@ -18,6 +18,7 @@ import traceback
 
 uvx_path = shutil.which('uvx')
 npx_path = shutil.which('npx')
+print(npx_path)
 PlannerAgent = PlannerAgent()
 AccomodationAgent = AccomodationAgent()
 ActivitesAgent = ActivitesAgent()
