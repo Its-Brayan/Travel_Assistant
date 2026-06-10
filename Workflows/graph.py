@@ -59,7 +59,7 @@ def accomodation_node(state:TravelAgent):
     clean_text = result.content
     print("Comparing prices...")
     if isinstance(clean_text,dict):
-        "\n".join(f"{k}:{v}" for k,v in clean_text.items())
+        clean_text = "\n".join(f"{k}:{v}" for k,v in clean_text.items())
     return{
         'accomodate':clean_text
     }
@@ -70,7 +70,7 @@ def activites_node(state:TravelAgent):
    result = acitivities_result['activity_plan']
    clean_text = result.content
    if isinstance(clean_text,dict):
-       "\n".join(f"{k}:{v}" for k, v in clean_text.items())
+       clean_text = "\n".join(f"{k}:{v}" for k, v in clean_text.items())
    return{
        'activities': clean_text
    }
@@ -81,7 +81,7 @@ def budget_node(state:TravelAgent):
     result = budget_result['budget_plan']
     clean_text = result.content
     if isinstance(clean_text,dict):
-        "\n".join(f"{k}:{v}" for k,v in clean_text.items())
+        clean_text = "\n".join(f"{k}:{v}" for k,v in clean_text.items())
     return{
         'budget': clean_text
     }
@@ -96,7 +96,7 @@ def itinerary_node(state:TravelAgent):
     result = itinerary_result['itinerary']
     clean_text = result.content
     if isinstance(clean_text,dict):
-        "\n".join(f"{k}:{v}" for k, v in clean_text.items())
+        clean_text = "\n".join(f"{k}:{v}" for k, v in clean_text.items())
     return{
         'itinerary':clean_text
     }
