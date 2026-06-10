@@ -44,7 +44,7 @@ def planner_node(state:TravelAgent):
     result = plan_result['plan_result']
     print(f"Examining the question{state['query']}")
     return{
-        'plan' : result.content
+        'plan' : str(result.content)
     }
 
 def accomodation_node(state:TravelAgent):
@@ -53,7 +53,7 @@ def accomodation_node(state:TravelAgent):
     result = accomodation_result['accomodation_result']
     print("Comparing prices...")
     return{
-        'accomodate':result.content
+        'accomodate':str(result.content)
     }
 
 def activites_node(state:TravelAgent):
@@ -61,7 +61,7 @@ def activites_node(state:TravelAgent):
    acitivities_result = ActivitesAgent.plan_activites(state['plan'])
    result = acitivities_result['activity_plan']
    return{
-       'activities':result.content
+       'activities': str(result.content)
    }
 
 def budget_node(state:TravelAgent):
@@ -69,7 +69,7 @@ def budget_node(state:TravelAgent):
     budget_result = BudgetAgent.budget_plan(state['plan'])
     result = budget_result['budget_plan']
     return{
-        'budget':result.content
+        'budget': str(result.content)
     }
 
 def itinerary_node(state:TravelAgent):
@@ -81,7 +81,7 @@ def itinerary_node(state:TravelAgent):
     )
     result = itinerary_result['itinerary']
     return{
-        'itinerary':result.content
+        'itinerary':str(result.content)
     }
 
 
