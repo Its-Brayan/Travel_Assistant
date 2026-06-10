@@ -78,7 +78,7 @@ def budget_node(state:TravelAgent):
     budget_result = BudgetAgent.budget_plan(state['plan'])
     result = budget_result['budget_plan']
     clean_text = result.content
-    if isinstance(clean_text,dict);
+    if isinstance(clean_text,dict):
         "\n".join(f"{k}:{v}" for k,v in clean_text.items())
     return{
         'budget': clean_text
