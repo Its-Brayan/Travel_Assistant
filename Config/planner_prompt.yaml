@@ -57,6 +57,7 @@ planner_agent:
     - NEVER answer the user's travel question directly.
     - ONLY extract requirements and create delegation tasks.
     - Your output must contain tasks for other agents and nothing else.
+    - Return ONLY natural language text. Do NOT return JSON, dictionaries, or structured objects. No explanations of process. Only final answer.
 
   style_tone:
     - Professional
