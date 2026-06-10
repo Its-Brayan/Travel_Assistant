@@ -65,7 +65,7 @@ if st.session_state.result:
     st.subheader("📍 Generated Plan")
 
     res = st.session_state.result
-    st.subheader("📍 Your Trip Plan")
+  
 
     # st.markdown("### 🧭 Overview")
     # plan = st.write(res.get("plan"))
@@ -75,17 +75,23 @@ if st.session_state.result:
     # except:
     #     st.markdown(plan)
 
+   
+    # 1. Hide planner JSON completely
+    st.markdown("### 🧭 Overview")
+    st.markdown(res.get("plan", ""))
+
+    # 2. Clean sections only
     st.markdown("### 🏨 Accommodation")
-    st.write(res.get("accomodate"))
+    st.markdown(res.get("accomodate", ""))
 
     st.markdown("### 🎯 Activities")
-    st.write(res.get("activities"))
+    st.markdown(res.get("activities", ""))
 
     st.markdown("### 💰 Budget")
-    st.write(res.get("budget"))
+    st.markdown(res.get("budget", ""))
 
-    st.markdown("### 🗺️ Final Itinerary")
-    st.write(res.get("itinerary"))
+    st.markdown("### 🗺️ Itinerary")
+    st.markdown(res.get("itinerary", ""))
 
     st.download_button(
         label="Download Plan",
