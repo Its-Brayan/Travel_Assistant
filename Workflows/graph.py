@@ -167,6 +167,6 @@ async def run_pipeline(query:str):
 
 
 
-if __name__ == '__main__':
-    result = asyncio.run(run_pipeline("hello"))
-    print(result)
+# if __name__ == '__main__':
+#     result = asyncio.run(run_pipeline("hello"))
+#     print(result)
