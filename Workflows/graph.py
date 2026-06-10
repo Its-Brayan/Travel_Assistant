@@ -164,10 +164,4 @@ async def run_pipeline(query:str):
              
 
 
-if __name__ == '__main__':
-    response = asyncio.run(run_pipeline("Hotels around mombasa and activites I could around there, my budget is 5000 ksh"))
-    
-    print(response)
-
-
 
