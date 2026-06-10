@@ -3,7 +3,7 @@ import streamlit as st
 import asyncio
 from groq import RateLimitError
 from datetime import date
-
+import traceback
 st.set_page_config(
     page_title="Travel Planner",
     layout="wide"   
@@ -38,7 +38,7 @@ def run_async_pipeline(inputs):
     return asyncio.run(run_pipeline(inputs))
 
 if st.button("Plan Trip 🚀"):
-
+ 
     if not query:
         st.warning("Please enter a travel request")
         st.stop()
@@ -54,8 +54,8 @@ if st.button("Plan Trip 🚀"):
             result = run_async_pipeline(inputs)
             st.session_state.result = result
 
-        except Exception as e:
-            st.error(f"Error: {str(e)}")
+        except Exception:
+            st.error(f"Error: {traceback.format_exc()}")
 
 # ----------------------------
 # Output section
