@@ -61,7 +61,7 @@ budget_agent:
       status: Over Budget
 
   output_constraints:
-    - Return structured data only
+    - Return ONLY natural language text in STRUCTURED FORM.Only final answer.
     - ALL values must be in Kenyan Shillings (KES)
     - No mixed currency output allowed
     - Include conversion transparency in breakdown

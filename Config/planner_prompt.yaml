@@ -46,7 +46,7 @@ planner_agent:
           task: Assemble the final itinerary.
 
   output_constraints:
-    - RETURN structured data.
+    - Return ONLY natural language text in STRUCTURED FORM.Only final answer.
     - Do not recommend hotels or activities directly.
     - Focus only on planning and delegation.
     - NEVER search for hotels.

@@ -58,7 +58,8 @@ accommodation_agent:
     - Include supporting reasoning.
     - Do not create fictional accommodations.
     - Base recommendations on search results.
-    - RETURN structured data
+    - Return ONLY natural language text in STRUCTURED FORM.Only final answer.
+
   style_tone:
     - Helpful
     - Objective
