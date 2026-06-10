@@ -44,7 +44,7 @@ itinerary_agent:
         status: Within Budget
 
   output_constraints:
-    - Return ONLY natural language text in STRUCTURED FORM.Only final answer.
+    - Return ONLY natural language text in STRUCTURED FORM.Only final answer.NO EXPLANATIONS
     - Include accommodation details.
     - Include daily activities.
     - Include budget summary.
