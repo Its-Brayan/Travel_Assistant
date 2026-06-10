@@ -63,7 +63,23 @@ if st.button("Plan Trip 🚀"):
 if st.session_state.result:
     st.subheader("📍 Generated Plan")
 
-    st.write(st.session_state.result)
+    res = st.session_state.result
+    st.subheader("📍 Your Trip Plan")
+
+    st.markdown("### 🧭 Overview")
+    st.write(res.get("plan"))
+
+    st.markdown("### 🏨 Accommodation")
+    st.write(res.get("accomodate"))
+
+    st.markdown("### 🎯 Activities")
+    st.write(res.get("activities"))
+
+    st.markdown("### 💰 Budget")
+    st.write(res.get("budget"))
+
+    st.markdown("### 🗺️ Final Itinerary")
+    st.write(res.get("itinerary"))
 
     st.download_button(
         label="Download Plan",
