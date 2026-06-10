@@ -155,7 +155,7 @@ async def run_pipeline(query:str):
                         'activities':'',
                         'budget':'',
                         'itinerary':'',
-                        'mcp_session':session
+                    
                      }
                  )
      print(f"\n{'='*60}")
