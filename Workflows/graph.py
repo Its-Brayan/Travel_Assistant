@@ -121,7 +121,7 @@ async def run_pipeline(query:str):
       
      ),
      "web_search":StdioServerParameters(
-         command ="uvx",
+         command ="/home/brayan/.local/bin/uvx",
          args=["duckduckgo-mcp-server"],
          env = {
                 "DDG_SAFE_SEARCH": "STRICT",
