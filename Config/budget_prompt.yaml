@@ -20,6 +20,7 @@ budget_agent:
     - Compare costs against the user budget.
     - Suggest savings if over budget.
     - Return results to the Itinerary Agent.
+    - ALL the cost should in kenyan shilling
 
   examples:
     input:
