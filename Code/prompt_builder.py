@@ -57,5 +57,5 @@ def build_prompt_body(
     if input_prompt is not None:
         prompt_parts.append(input_prompt)
     
-    return "\n\n".join(prompt_parts)
+    return "\n\n".join(str(part) for part in prompt_parts)
         
