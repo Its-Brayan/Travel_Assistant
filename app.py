@@ -4,6 +4,7 @@ import asyncio
 from groq import RateLimitError
 from datetime import date
 import traceback
+import json
 st.set_page_config(
     page_title="Travel Planner",
     layout="wide"   
@@ -67,7 +68,12 @@ if st.session_state.result:
     st.subheader("📍 Your Trip Plan")
 
     st.markdown("### 🧭 Overview")
-    st.write(res.get("plan"))
+    plan = st.write(res.get("plan"))
+    try:
+        plan = json.load(plan)
+        st.json(plan)
+    except:
+        st.markdown(plan)
 
     st.markdown("### 🏨 Accommodation")
     st.write(res.get("accomodate"))
