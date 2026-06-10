@@ -67,13 +67,13 @@ if st.session_state.result:
     res = st.session_state.result
     st.subheader("📍 Your Trip Plan")
 
-    st.markdown("### 🧭 Overview")
-    plan = st.write(res.get("plan"))
-    try:
-        plan = json.load(plan)
-        st.json(plan)
-    except:
-        st.markdown(plan)
+    # st.markdown("### 🧭 Overview")
+    # plan = st.write(res.get("plan"))
+    # try:
+    #     plan = json.load(plan)
+    #     st.json(plan)
+    # except:
+    #     st.markdown(plan)
 
     st.markdown("### 🏨 Accommodation")
     st.write(res.get("accomodate"))
