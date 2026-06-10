@@ -61,12 +61,13 @@ activities_agent:
           reason: Suitable evening weather conditions.
 
   output_constraints:
+    - Return ONLY natural language text in STRUCTURED FORM.Only final answer.NO EXPLANATIONS
     - Create activities for each travel day.
     - Consider weather forecasts.
     - Avoid duplicate attractions.
     - Include weather-based reasoning.
     - Use structured output.
-    - Return ONLY natural language text in STRUCTURED FORM.Only final answer.NO EXPLANATIONS
+
   style_tone:
     - Practical
     - Traveler-focused
