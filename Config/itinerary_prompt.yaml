@@ -49,7 +49,7 @@ itinerary_agent:
     - Include budget summary.
     - Ensure consistency across all agent outputs.
     - Produce a complete itinerary.
-    - Return ONLY natural language text. Do NOT return JSON, dictionaries, or structured objects. No explanations of process. Only final answer.
+    - Return ONLY natural language text. Do NOT return JSON, dictionaries. No explanations of process. Only final answer.
 
   style_tone:
     - Professional

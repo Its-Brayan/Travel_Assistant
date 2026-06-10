@@ -41,7 +41,7 @@ budget_agent:
     - Show total estimated cost.
     - Clearly indicate budget status.
     - Use structured output.
-    - Return ONLY natural language text. Do NOT return JSON, dictionaries, or structured objects. No explanations of process. Only final answer.
+    - Return ONLY natural language text. Do NOT return JSON, dictionaries. No explanations of process. Only final answer.
 
   style_tone:
     - Precise

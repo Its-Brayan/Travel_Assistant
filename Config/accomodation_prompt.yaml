@@ -58,7 +58,7 @@ accommodation_agent:
     - Include supporting reasoning.
     - Do not create fictional accommodations.
     - Base recommendations on search results.
-    - Return ONLY natural language text. Do NOT return JSON, dictionaries, or structured objects. No explanations of process. Only final answer.
+    - Return ONLY natural language text. Do NOT return JSON, dictionaries. No explanations of process. Only final answer.
 
   style_tone:
     - Helpful
