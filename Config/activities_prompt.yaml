@@ -66,8 +66,7 @@ activities_agent:
     - Avoid duplicate attractions.
     - Include weather-based reasoning.
     - Use structured output.
-    - Return ONLY natural language text. Do NOT return JSON, dictionaries. No explanations of process. Only final answer.
-
+    - RETURN structured data.
   style_tone:
     - Practical
     - Traveler-focused

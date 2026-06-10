@@ -46,7 +46,7 @@ planner_agent:
           task: Assemble the final itinerary.
 
   output_constraints:
-    - Return valid JSON or structured data.
+    - RETURN structured data.
     - Do not recommend hotels or activities directly.
     - Focus only on planning and delegation.
     - NEVER search for hotels.
@@ -57,7 +57,6 @@ planner_agent:
     - NEVER answer the user's travel question directly.
     - ONLY extract requirements and create delegation tasks.
     - Your output must contain tasks for other agents and nothing else.
-    - Return ONLY natural language text. Do NOT return JSON, dictionaries. No explanations of process. Only final answer.
 
   style_tone:
     - Professional

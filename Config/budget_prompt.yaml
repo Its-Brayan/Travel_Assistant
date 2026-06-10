@@ -37,12 +37,12 @@ budget_agent:
       status: Within Budget
 
   output_constraints:
+    - RETURN Structured data
     - Include detailed cost breakdown.
     - Show total estimated cost.
     - Clearly indicate budget status.
     - Use structured output.
-    - Return ONLY natural language text. Do NOT return JSON, dictionaries. No explanations of process. Only final answer.
-
+  
   style_tone:
     - Precise
     - Analytical

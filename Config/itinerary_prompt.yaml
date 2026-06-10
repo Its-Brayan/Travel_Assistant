@@ -44,13 +44,13 @@ itinerary_agent:
         status: Within Budget
 
   output_constraints:
+    - RETURN structured data
     - Include accommodation details.
     - Include daily activities.
     - Include budget summary.
     - Ensure consistency across all agent outputs.
     - Produce a complete itinerary.
-    - Return ONLY natural language text. Do NOT return JSON, dictionaries. No explanations of process. Only final answer.
-
+   
   style_tone:
     - Professional
     - Organized
