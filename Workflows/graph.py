@@ -1,5 +1,6 @@
 import sys
 import os
+import shutil
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0,ROOT_DIR)
 from Agents.Planner_Agent import PlannerAgent
@@ -15,6 +16,7 @@ import asyncio
 from langgraph.types import interrupt
 import traceback
 
+uvx_path = shutil.which('uvx')
 PlannerAgent = PlannerAgent()
 AccomodationAgent = AccomodationAgent()
 ActivitesAgent = ActivitesAgent()
@@ -113,7 +115,7 @@ async def run_pipeline(query:str):
      
      servers ={
          "weather":StdioServerParameters(
-         command='/home/brayan/Aiprojects/venv/bin/python',
+         command=sys.executable,
          args=[
         "-m",
         "mcp_weather_server"
@@ -121,7 +123,7 @@ async def run_pipeline(query:str):
       
      ),
      "web_search":StdioServerParameters(
-         command ="/home/brayan/.local/bin/uvx",
+         command = uvx_path,
          args=["duckduckgo-mcp-server"],
          env = {
                 "DDG_SAFE_SEARCH": "STRICT",
