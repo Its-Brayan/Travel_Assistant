@@ -17,6 +17,7 @@ from langgraph.types import interrupt
 import traceback
 
 uvx_path = shutil.which('uvx')
+npx_path = shutil.which('npx')
 PlannerAgent = PlannerAgent()
 AccomodationAgent = AccomodationAgent()
 ActivitesAgent = ActivitesAgent()
@@ -145,6 +146,12 @@ async def run_pipeline(query:str):
                 "DDG_REGION": ""
             }
 
+     ),
+     "currency-conversion": StdioServerParameters(
+         command=npx_path,
+         args= [
+             "mcp-remote", "https://currency-mcp.wesbos.com/sse"
+         ]
      )
      }
      sessions = {}
