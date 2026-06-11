@@ -82,13 +82,13 @@ if st.session_state.result:
 
     # 2. Clean sections only
     st.markdown("### 🏨 Accommodation")
-    st.markdown(res.get("accomodate", ""))
+    st.markdown(res.get("accomodate"))
 
     st.markdown("### 🎯 Activities")
     st.markdown(res.get("activities", ""))
 
     st.markdown("### 💰 Budget")
-    st.markdown(res.get("budget", ""))
+    st.markdown(res.get("budget"))
 
     st.markdown("### 🗺️ Itinerary")
     st.markdown(res.get("itinerary", ""))
