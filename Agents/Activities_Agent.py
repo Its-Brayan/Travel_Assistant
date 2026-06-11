@@ -11,7 +11,7 @@ class ActivitesAgent:
         llm_with_tools = llm.bind_tools(tools)
         config = load_config(ACTIVITIES_PROMPT)
         prompt = build_prompt_body(config['activities_agent'],query)
-        response = llm_with_tools.invoke(prompt)
+        response = await llm_with_tools.invoke(prompt)
 
         return {
             'activity_plan':response
