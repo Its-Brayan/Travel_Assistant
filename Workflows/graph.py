@@ -154,7 +154,7 @@ async def run_pipeline(query:str):
          args = [ 
         "-y",                                                 # Auto-accept npm install
         "mcp-remote",                                         # The proxy utility
-        "https://apify.actor", 
+        "https://vector384--currency-exchange-mcp.apify.actor/mcp", 
         "--header", f"Authorization: Bearer {mcp_env}"],
                
      )
