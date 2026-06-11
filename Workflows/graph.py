@@ -148,9 +148,10 @@ async def run_pipeline(query:str):
             }
 
      ),
-     "currency-converter": StdioServerParameters(
-         command = sys.executable,
-         args = ["-m", "currency_mcp_server"],
+     "exchange-rateapi": StdioServerParameters(
+         command = npx_path,
+         args = ["-y", "@exchangerateapi/mcp-server"],
+         env= {"EXCHANGE_RATE_API_KEY":os.getenv('EXCHANGE_RATE_API_KEY')}
      )
      }
      sessions = {}
