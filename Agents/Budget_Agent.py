@@ -8,7 +8,6 @@ class BudgetAgent:
    async def budget_plan(self, query:str, mcp_session:dict):
         currency_session = mcp_session.get('actors-mcp-server')
         tools = await load_mcp_tools(currency_session)
-       
         llm_with_tools = self.llm.bind_tools(tools)
         config = load_config(BUDGET_PROMPT)
         prompt = build_prompt_body(config['budget_agent'],query)
