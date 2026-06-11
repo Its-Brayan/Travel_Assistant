@@ -10,6 +10,8 @@ class ActivitesAgent:
         tools = await load_mcp_tools(web_search)
         llm_with_tools = self.llm.bind_tools(tools)
         config = load_config(ACTIVITIES_PROMPT)
+        print("PLAN INPUT:", query)
+        print("TOOLS LOADED:",tools)
         prompt = build_prompt_body(config['activities_agent'],query)
         response = await llm_with_tools.ainvoke(prompt)
 

@@ -11,7 +11,8 @@ class AccomodationAgent():
         llm_with_tools = self.llm.bind_tools(tools)
         config = load_config(ACCOMODATION_PROMPT)
         prompt = build_prompt_body(config['accommodation_agent'],query)
-       
+        print("PLAN INPUT:", query)
+        print("TOOLS LOADED:",tools)
         result = await llm_with_tools.ainvoke(prompt)
 
         return{
