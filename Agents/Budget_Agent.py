@@ -14,6 +14,7 @@ class BudgetAgent:
         print("PLAN INPUT:", query)
         print("TOOLS LOADED:",tools)
         response = await llm_with_tools.ainvoke(prompt)
+        print("RAW RESPONSE", response)
         return{
             'budget_plan':response
         }

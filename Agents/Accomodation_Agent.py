@@ -14,7 +14,7 @@ class AccomodationAgent():
         print("PLAN INPUT:", query)
         print("TOOLS LOADED:",tools)
         result = await llm_with_tools.ainvoke(prompt)
-
+        print("RAW RESPONSE", result)
         return{
             'accomodation_result':result
         } 

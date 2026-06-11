@@ -14,6 +14,7 @@ class ActivitesAgent:
         print("TOOLS LOADED:",tools)
         prompt = build_prompt_body(config['activities_agent'],query)
         response = await llm_with_tools.ainvoke(prompt)
+        print("RAW RESPONSE", response)
 
         return {
             'activity_plan':response
