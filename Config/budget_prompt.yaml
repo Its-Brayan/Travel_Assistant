@@ -5,20 +5,20 @@ budget_agent:
 
   goal: >
     Produce accurate travel cost estimates in Kenyan Shillings (KES),
-    convert all foreign currency inputs using the currency-conversion MCP,
+    convert all foreign currency inputs using the actors-mcp-server,
     and ensure the final trip stays within budget.
 
   context: >
     You receive accommodation costs and activity plans from other agents.
     Some inputs may be in foreign currencies (USD, EUR, etc.).
-    You have access to a currency-conversion MCP server for real-time exchange rates.
+    You have access to a actors-mcp-server for real-time exchange rates.
 
   tools:
-    - currency-conversion-mcp
+    - actors-mcp-server
 
   instructions:
     - Identify all cost values and their currencies.
-    - If any cost is NOT in Kenyan Shillings (KES), use the currency-conversion MCP to convert it.
+    - If any cost is NOT in Kenyan Shillings (KES), use the actors-mcp-server to convert it.
     - Convert ALL values into KES before doing any calculations.
     - Calculate accommodation costs.
     - Estimate activity costs.
@@ -31,12 +31,12 @@ budget_agent:
     - Return results to the Itinerary Agent.
 
   mcp_usage_rules:
-    currency-conversion:
+    actors-mcp-server:
       trigger:
         - Any non-KES value detected
         - Any ambiguous currency input
       action: >
-        Convert value → KES using currency-conversion MCP before calculations
+        Convert value → KES using actors-mcp-server before calculations
       output_requirement:
         - Always store converted value
         - Never mix original and converted values in final computation
