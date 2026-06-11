@@ -149,7 +149,7 @@ async def run_pipeline(query:str):
             }
 
      ),
-     "currency-conversion": StdioServerParameters(
+     "actors-mcp-server": StdioServerParameters(
          command ='npx',
          args = ["-y", "@apify/actors-mcp-server"],
          env = mcp_env
