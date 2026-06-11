@@ -151,7 +151,9 @@ async def run_pipeline(query:str):
      ),
      "actors-mcp-server": StdioServerParameters(
          command ='npx',
-         args = ["-y", "@apify/actors-mcp-server"],
+         args = ["-y",
+                 "@apify/actors-mcp-server",
+                 "--tools", "vector384/currency-exchange-mcp"],
          env = mcp_env
                
      )
