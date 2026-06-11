@@ -149,10 +149,9 @@ async def run_pipeline(query:str):
             }
 
      ),
-     "exchange-rateapi": StdioServerParameters(
+     "currency-conversion": StdioServerParameters(
          command ='npx',
-         args = ["-y", "@exchangerateapi/mcp-server"],
-         env=mcp_env,
+         args = ["mcp-remote", "https://currency-mcp.wesbos.com/sse"],
                
      )
      }
