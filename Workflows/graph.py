@@ -15,6 +15,7 @@ from mcp.client.stdio import stdio_client,StdioServerParameters
 import asyncio
 from langgraph.types import interrupt
 import traceback
+from contextlib import AsyncExitStack
 
 uvx_path = shutil.which('uvx')
 npx_path = shutil.which('npx') or "npx"
@@ -158,20 +159,21 @@ async def run_pipeline(query:str):
                
      )
      }
-     sessions = {}
+     async with AsyncExitStack() as stack:
+      sessions = {}
      for name, server_params in servers.items():
-         async with stdio_client(server_params) as (read,write):
-           async with ClientSession(read,write) as session:
-                print("Transport (stdio) connected")
-                print("Session created")
-                await session.initialize()
-                print("MCP initialized successfully")
-                sessions[name] = session
-                tools = await session.list_tools()
-                print("Tools from: ",name )
-                print("TOOLS",tools)
-                for tool in tools.tools:
-                 print(f"- {tool.name}")
+          read,write = await stack.enter_async_context(stdio_client(server_params))
+          session = await stack.enter_async_context(ClientSession(read,write))
+          print("Transport (stdio) connected")
+          print("Session created")
+          await session.initialize()
+          print("MCP initialized successfully")
+          sessions[name] = session
+          tools = await session.list_tools()
+          print("Tools from: ",name )
+          print("TOOLS",tools)
+          for tool in tools.tools:
+           print(f"- {tool.name}")
      graph = run_graph()
      result = await graph.ainvoke(
                        {
