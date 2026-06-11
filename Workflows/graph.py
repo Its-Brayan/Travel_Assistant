@@ -161,7 +161,7 @@ async def run_pipeline(query:str):
      }
      async with AsyncExitStack() as stack:
       sessions = {}
-     for name, server_params in servers.items():
+      for name, server_params in servers.items():
           read,write = await stack.enter_async_context(stdio_client(server_params))
           session = await stack.enter_async_context(ClientSession(read,write))
           print("Transport (stdio) connected")
@@ -183,7 +183,7 @@ async def run_pipeline(query:str):
                         'activities':'',
                         'budget':'',
                         'itinerary':'',
-                        'mcp_session':session
+                        'mcp_sessions':session
                      }
                  )
      print(f"\n{'='*60}")
