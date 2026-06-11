@@ -154,7 +154,7 @@ async def run_pipeline(query:str):
          args = [ 
       "-y",
         "mcp-remote",
-        "https://vector384--currency-exchange-mcp.apify.actor/mcp",
+        "harvest/google-currency-conversion-rates-scraper",
         "--auth",
         "bearer",
         "--header",
