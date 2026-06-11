@@ -152,8 +152,8 @@ async def run_pipeline(query:str):
      "exchange-rateapi": StdioServerParameters(
          command = 'npx',
          args = ["-y", "@exchangerateapi/mcp-server"],
-         env= {"EXCHANGE_RATE_API_KEY":mcp_env,
-               }
+         env=mcp_env,
+               
      )
      }
      sessions = {}
