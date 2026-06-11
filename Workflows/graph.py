@@ -151,15 +151,8 @@ async def run_pipeline(query:str):
      ),
      "currency-conversion": StdioServerParameters(
          command ='npx',
-         args = [ 
-      "-y",
-        "mcp-remote",
-        "harvest/google-currency-conversion-rates-scraper",
-        "--auth",
-        "bearer",
-        "--header",
-        f"Authorization: Bearer {mcp_env}"
-         ]
+         args = ["-y", "@apify/actors-mcp-server"],
+         env = mcp_env
                
      )
      }
