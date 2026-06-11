@@ -152,9 +152,11 @@ async def run_pipeline(query:str):
      "currency-conversion": StdioServerParameters(
          command ='npx',
          args = [ 
-        "-y",
+      "-y",
         "mcp-remote",
         "https://vector384--currency-exchange-mcp.apify.actor/mcp",
+        "--auth",
+        "bearer",
         "--header",
         f"Authorization: Bearer {mcp_env}"
          ]
