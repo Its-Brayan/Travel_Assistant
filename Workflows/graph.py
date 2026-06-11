@@ -174,8 +174,8 @@ async def run_pipeline(query:str):
           print("TOOLS",tools)
           for tool in tools.tools:
            print(f"- {tool.name}")
-     graph = run_graph()
-     result = await graph.ainvoke(
+      graph = run_graph()
+      result = await graph.ainvoke(
                        {
                          "query":query,
                          'plan': '',
