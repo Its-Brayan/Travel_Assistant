@@ -53,9 +53,9 @@ def planner_node(state:TravelAgent):
         'plan' : clean_text
     }
 
-def accomodation_node(state:TravelAgent):
+async def accomodation_node(state:TravelAgent):
     print("Finding the best hotel...")
-    accomodation_result = AccomodationAgent.accomodate(state['plan'],state['mcp_sessions'])
+    accomodation_result = await AccomodationAgent.accomodate(state['plan'],state['mcp_sessions'])
     result = accomodation_result['accomodation_result']
     clean_text = result.content
     print("Comparing prices...")
@@ -65,9 +65,9 @@ def accomodation_node(state:TravelAgent):
         'accomodate':clean_text
     }
 
-def activites_node(state:TravelAgent):
+async def activites_node(state:TravelAgent):
    print("Finding activities...")
-   acitivities_result = ActivitesAgent.plan_activites(state['plan'],state['mcp_sessions'])
+   acitivities_result = await ActivitesAgent.plan_activites(state['plan'],state['mcp_sessions'])
    result = acitivities_result['activity_plan']
    clean_text = result.content
    if isinstance(clean_text,dict):
@@ -76,9 +76,9 @@ def activites_node(state:TravelAgent):
        'activities': clean_text
    }
 
-def budget_node(state:TravelAgent):
+async def budget_node(state:TravelAgent):
     print("Calculating budget and ensuring compliance...")
-    budget_result = BudgetAgent.budget_plan(state['plan'],state['mcp_sessions'])
+    budget_result =await BudgetAgent.budget_plan(state['plan'],state['mcp_sessions'])
     result = budget_result['budget_plan']
     clean_text = result.content
     if isinstance(clean_text,dict):
