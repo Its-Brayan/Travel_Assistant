@@ -130,7 +130,7 @@ async def run_pipeline(query:str):
      print(f"\n{'='*60}\n")
      print("Starting MCP connection...")
      mcp_env = os.environ.copy()
-     mcp_env["CURRENCY_EXCHANGE"] = os.getenv('CURRENCY_EXCHANGE')
+     mcp_env["APIFY_TOKEN"] = os.getenv('APIFY_TOKEN')
      servers ={
          "weather":StdioServerParameters(
          command=sys.executable,
