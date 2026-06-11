@@ -14,7 +14,7 @@ budget_agent:
     You have access to a currency-conversion MCP server for real-time exchange rates.
 
   tools:
-    - currency-conversion-mcp
+    - exchange-rateapi
 
   instructions:
     - Identify all cost values and their currencies.
@@ -31,12 +31,12 @@ budget_agent:
     - Return results to the Itinerary Agent.
 
   mcp_usage_rules:
-    currency-conversion:
+    exchange-rateapi:
       trigger:
         - Any non-KES value detected
         - Any ambiguous currency input
       action: >
-        Convert value → KES using currency-conversion MCP before calculations
+        Convert value → KES using exchange-rateapi MCP before calculations
       output_requirement:
         - Always store converted value
         - Never mix original and converted values in final computation
