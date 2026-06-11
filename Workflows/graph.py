@@ -150,7 +150,7 @@ async def run_pipeline(query:str):
 
      ),
      "exchange-rateapi": StdioServerParameters(
-         command = 'npx',
+         command = npx_path,
          args = ["-y", "@exchangerateapi/mcp-server"],
          env=mcp_env,
                
