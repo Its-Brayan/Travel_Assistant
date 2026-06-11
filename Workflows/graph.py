@@ -130,7 +130,7 @@ async def run_pipeline(query:str):
      print(f"\n{'='*60}\n")
      print("Starting MCP connection...")
      mcp_env = os.environ.copy()
-     mcp_env["EXCHANGE_RATE_API_KEY"] = os.getenv('EXCHANGE_RATE_API_KEY')
+     mcp_env["CURRENCY_EXCHANGE"] = os.getenv('CURRENCY_EXCHANGE')
      servers ={
          "weather":StdioServerParameters(
          command=sys.executable,
@@ -151,7 +151,8 @@ async def run_pipeline(query:str):
      ),
      "currency-conversion": StdioServerParameters(
          command ='npx',
-         args = ["mcp-remote", "https://currency-mcp.wesbos.com/sse"],
+         args = ["mcp-remote", "https://vector384--currency-exchange-mcp.apify.actor/mcp"],
+         env = mcp_env
                
      )
      }
