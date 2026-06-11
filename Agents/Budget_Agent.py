@@ -12,7 +12,7 @@ class BudgetAgent:
         config = load_config(BUDGET_PROMPT)
         prompt = build_prompt_body(config['budget_agent'],query)
       
-        response = llm_with_tools.invoke(prompt)
+        response = await llm_with_tools.invoke(prompt)
         return{
             'budget_plan':response
         }
