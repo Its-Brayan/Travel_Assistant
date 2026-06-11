@@ -34,7 +34,7 @@ class TravelAgent(TypedDict):
     start_date:str
     budget:str
     itinerary:str
-    mcp_session:ClientSession
+    mcp_sessions:dict[str,ClientSession]
 
 def planner_node(state:TravelAgent):
     # user_input = interrupt({
@@ -55,7 +55,7 @@ def planner_node(state:TravelAgent):
 
 def accomodation_node(state:TravelAgent):
     print("Finding the best hotel...")
-    accomodation_result = AccomodationAgent.accomodate(state['plan'])
+    accomodation_result = AccomodationAgent.accomodate(state['plan'],state['mcp_sessions'])
     result = accomodation_result['accomodation_result']
     clean_text = result.content
     print("Comparing prices...")
@@ -67,7 +67,7 @@ def accomodation_node(state:TravelAgent):
 
 def activites_node(state:TravelAgent):
    print("Finding activities...")
-   acitivities_result = ActivitesAgent.plan_activites(state['plan'])
+   acitivities_result = ActivitesAgent.plan_activites(state['plan'],state['mcp_sessions'])
    result = acitivities_result['activity_plan']
    clean_text = result.content
    if isinstance(clean_text,dict):
@@ -78,7 +78,7 @@ def activites_node(state:TravelAgent):
 
 def budget_node(state:TravelAgent):
     print("Calculating budget and ensuring compliance...")
-    budget_result = BudgetAgent.budget_plan(state['plan'])
+    budget_result = BudgetAgent.budget_plan(state['plan'],state['mcp_sessions'])
     result = budget_result['budget_plan']
     clean_text = result.content
     if isinstance(clean_text,dict):
